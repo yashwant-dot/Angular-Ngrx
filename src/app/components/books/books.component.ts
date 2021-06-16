@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { BooksService } from '../../services/books.service';
 import {MatDialog} from '@angular/material/dialog';
 import { AddBookComponent } from '../add-book/add-book.component';
 import {FormControl} from '@angular/forms';
 
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, fromEvent, Subject } from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
 import { retrievedBookList, addBook } from '../../store/books.actions';
 
 @Component({
@@ -19,6 +20,8 @@ export class BooksComponent implements OnInit {
   data!: Observable<any[]>;
   allBooks!: any[];
 
+  mySubject = new Subject<string>();
+
   constructor(private bookServ: BooksService, private dialog: MatDialog, private store: Store<{ books: any[] }>) {
     this.data = this.store.select('books');
    }
@@ -31,8 +34,12 @@ export class BooksComponent implements OnInit {
         this.bookServ.booksLoaded = true;
       });
     }
+    // getting data from state
     this.data.subscribe(val => this.allBooks = val);
+    // handling search
     this.searchFormControl.valueChanges.subscribe(val => this.handleSearch(val));
+    // Debouncing
+    this.mySubject.pipe(debounceTime(300)).subscribe(val => this.search(val));
   }
 
   openDialog(): void {
@@ -53,14 +60,20 @@ export class BooksComponent implements OnInit {
   }
 
   handleSearch(text: string): void {
+    this.mySubject.next(text);
+  }
+
+  search(text: any): void {
+    
     this.data.subscribe(books => {
       if(!text) {
         this.allBooks = books;
         return;
       }
       this.allBooks = books.filter(book => 
-        String(book.volumeInfo.title).trim().toLowerCase().startsWith(text.toLowerCase())
+        String(book.volumeInfo.title).trim().toLowerCase().startsWith(String(text).toLowerCase())
       )
     });
   }
+
 }

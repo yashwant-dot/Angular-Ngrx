@@ -9,12 +9,13 @@
     <div class="booksListSearch">
       <mat-form-field class="formField" autocomplete="off">
         <mat-label>Search Book</mat-label>
-        <input matInput [formControl]="searchFormControl">
+        <input matInput [formControl]="searchFormControl" id="inputS">
       </mat-form-field>
     </div>
 
     <div class="booksListInfo">
       <app-book *ngFor="let book of allBooks" [book]="book"></app-book>
     </div>
+
   </div>
 </div>
