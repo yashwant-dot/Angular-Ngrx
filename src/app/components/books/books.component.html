@@ -1,0 +1,20 @@
+<div class="booksList">
+  <div class="container">
+
+    <div class="booksListHead">
+      <h1>Books</h1>
+      <button mat-raised-button color="primary" (click)="openDialog()">Create New Book</button>
+    </div>
+
+    <div class="booksListSearch">
+      <mat-form-field class="formField" autocomplete="off">
+        <mat-label>Search Book</mat-label>
+        <input matInput [formControl]="searchFormControl">
+      </mat-form-field>
+    </div>
+
+    <div class="booksListInfo">
+      <app-book *ngFor="let book of allBooks" [book]="book"></app-book>
+    </div>
+  </div>
+</div>

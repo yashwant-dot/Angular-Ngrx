@@ -1,0 +1,35 @@
+.bookDetail {
+  padding: 1rem 0;
+
+  .mainInfo {
+    margin-top: 1rem;
+    padding: 0.5rem 0;
+    display: flex;
+    flex-wrap: wrap;
+
+    img {
+      width: 350px;
+      height: 400px;
+      margin: 0 1rem 1rem 0;
+    }
+  }
+}
+
+.back {
+  padding: 0.5rem 2rem;
+  margin-top: 0.5rem;
+  box-shadow: 0 0 2px rgb(17, 17, 17, 0.5);
+  border-radius: 5px;
+  font-weight: 300;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.back:focus {
+  outline: 0;
+}
+
+.back:hover {
+  box-shadow: 0 0 5px rgb(17, 17, 17, 0.5);
+}

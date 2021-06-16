@@ -1,0 +1,17 @@
+<div class="bookDetail">
+  <div class="container">
+    <button routerLink="/" class="back">Back</button>
+    
+    <div class="mainInfo">
+      <img *ngIf="book.volumeInfo.imageLinks" src="{{book.volumeInfo.imageLinks.thumbnail}}" alt="thumbnail">
+
+      <div class="info">
+        <h1>{{book.volumeInfo.title}}</h1>
+        <p *ngIf="book.volumeInfo.authors">Authors: <span>{{book.volumeInfo.authors[0]}}</span></p>
+        <p *ngIf="book.volumeInfo.publishedDate">Published Date: <span>{{book.volumeInfo.publishedDate}}</span></p>
+        <p *ngIf="book.volumeInfo.publisher">Publisher: <span>{{book.volumeInfo.publisher}}</span></p>
+      </div>
+    </div>
+
+  </div>
+</div>

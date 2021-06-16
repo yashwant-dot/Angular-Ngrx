@@ -1,0 +1,27 @@
+.booksList {
+  padding: 1rem 0;
+}
+
+.booksListHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.booksListInfo {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  justify-content: center;
+  grid-gap: 0.5rem;
+}
+
+.booksListSearch {
+  min-width: 300px;
+  max-width: 500px;
+  
+  .formField {
+    width: 100%;
+  }
+}

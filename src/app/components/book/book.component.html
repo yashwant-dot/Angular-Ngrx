@@ -1,0 +1,7 @@
+<div class="card" (click)="getDetail()">
+  <h3>{{book.volumeInfo.title}}</h3>
+  <p *ngIf="book.volumeInfo.authors">Authors: 
+    <span *ngFor="let author of book.volumeInfo.authors">{{author}}</span>
+  </p>
+  <p *ngIf="book.volumeInfo.publishedDate">Published Date: <span>{{book.volumeInfo.publishedDate}}</span></p>
+</div>

@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>Add Book</h2>
+<mat-dialog-content class="mat-typography">
+  <form>
+    <div class="form-control">
+      <label for="title">Title</label>
+      <input type="text" [(ngModel)]="title" name="title" id="title" placeholder="Title">
+    </div>
+    <div class="form-control">
+      <label for="author">Author</label>
+      <input type="text" [(ngModel)]="author" name="author" id="author" placeholder="Author">
+    </div>
+    <div class="form-control">
+      <label for="publishdate">Publish Date</label>
+      <input type="date" [(ngModel)]="date" id="publishdate" name="publishdate">
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="close()">Cancel</button>
+  <button mat-button (click)="add()" cdkFocusInitial>ADD</button>
+</mat-dialog-actions>
