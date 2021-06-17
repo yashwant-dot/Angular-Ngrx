@@ -1,12 +1,12 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BooksService } from '../../services/books.service';
 import {MatDialog} from '@angular/material/dialog';
 import { AddBookComponent } from '../add-book/add-book.component';
 import {FormControl} from '@angular/forms';
 
 import { Store } from '@ngrx/store';
-import { Observable, fromEvent, Subject } from 'rxjs';
-import { debounceTime, map } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import { retrievedBookList, addBook } from '../../store/books.actions';
 
 @Component({
