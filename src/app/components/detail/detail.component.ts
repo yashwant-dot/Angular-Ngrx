@@ -15,8 +15,8 @@ export class DetailComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.params.id;
-    this.book = this.bookSrv.setDetailBook(id);
-    console.log(this.book);
+    this.bookSrv.detailBook.subscribe(val => this.book = val);
+    this.bookSrv.setDetailBook(id);
   }
 
 }

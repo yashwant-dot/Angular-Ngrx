@@ -13,6 +13,10 @@
       </mat-form-field>
     </div>
 
+    <div *ngIf="storeData | async as s" class="spinner">
+      <mat-spinner *ngIf="s.isLoading"></mat-spinner>
+    </div>
+
     <div class="booksListInfo">
       <app-book *ngFor="let book of allBooks" [book]="book"></app-book>
     </div>

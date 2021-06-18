@@ -13,7 +13,10 @@ export class BooksEffect {
   loadBooks = createEffect(() => this.action$.pipe(
     ofType<GetBooks>(BookStoreActionType.GetBooks),
     mergeMap(() => this.bookServ.getBooks().pipe(
-      map(data => (new SetBooks(data.items)))
+      map(data => {
+        if(data) this.bookServ.booksLoaded = true;
+        return new SetBooks(data.items)
+      })
     ))
   ))
 

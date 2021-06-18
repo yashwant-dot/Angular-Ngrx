@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import { AddBookComponent } from '../add-book/add-book.component';
 import {FormControl} from '@angular/forms';
+import { BooksService } from '../../services/books.service';
 
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
@@ -23,13 +24,15 @@ export class BooksComponent implements OnInit {
   storeData!: Observable<BookStore>;
   mySubject = new Subject<string>();
 
-  constructor(private dialog: MatDialog, private store: Store<AppState>) {
+  constructor(private dialog: MatDialog, private store: Store<AppState>, private bookServ: BooksService) {
     this.storeData = this.store.select('books');
    }
 
   ngOnInit(): void {
     // Getting data from api and adding it to state.
-    this.store.dispatch(new GetBooks());
+    if(!this.bookServ.booksLoaded) {
+      this.store.dispatch(new GetBooks());
+    }
     // getting data from state
     this.storeData.subscribe(val => this.allBooks = val.books);
     // handling search

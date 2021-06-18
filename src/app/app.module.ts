@@ -8,6 +8,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 import { DatePipe } from '@angular/common';
 
@@ -46,6 +48,8 @@ import { appReducer } from './store/reducer.all';
     ReactiveFormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatProgressSpinnerModule,
+    MatToolbarModule,
     StoreModule.forRoot(appReducer),
     EffectsModule.forRoot([BooksEffect])
   ],
