@@ -1,14 +1,9 @@
 import { BookStore } from './bookStore.model';
 import { BookStoreActionType, BookStoreActions } from './bookStore.actions';
-import { ActionReducerMap } from '@ngrx/store';
 
 const initialState: BookStore = {
   isLoading: false,
   books: []
-}
-
-export interface BookState {
-  books: BookStore
 }
 
 export function bookStoreReducer(state = initialState, action: BookStoreActions) {
@@ -22,8 +17,4 @@ export function bookStoreReducer(state = initialState, action: BookStoreActions)
     default:
       return { ...state}  
   }
-}
-
-export const reducer: ActionReducerMap<BookState, BookStoreActions> = {
-  books: bookStoreReducer
 }

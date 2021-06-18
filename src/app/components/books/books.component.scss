@@ -32,3 +32,11 @@
   }
 }
 
+@media(max-width: 500px) {
+  .booksList {
+
+    .booksListInfo {
+      grid-template-columns: 1fr;
+    }
+  }
+}
