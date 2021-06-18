@@ -20,7 +20,10 @@ import { DetailComponent } from './components/detail/detail.component';
 import { AddBookComponent } from './components/add-book/add-book.component';
 
 import { StoreModule } from '@ngrx/store';
-import { booksReducer } from './store/books.reducer';
+import { BooksEffect } from './store/bookStore.effects';
+import { EffectsModule } from '@ngrx/effects';
+import { appReducer } from './store/reducer.all';
+
 
 @NgModule({
   declarations: [
@@ -43,10 +46,11 @@ import { booksReducer } from './store/books.reducer';
     ReactiveFormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    StoreModule.forRoot({books: booksReducer}, {})
+    StoreModule.forRoot(appReducer),
+    EffectsModule.forRoot([BooksEffect])
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],
   entryComponents: [AddBookComponent]
 })
-export class AppModule { }
+export class AppModule { }  

@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { BooksService } from '../../services/books.service';
 import {MatDialog} from '@angular/material/dialog';
 import { AddBookComponent } from '../add-book/add-book.component';
 import {FormControl} from '@angular/forms';
 
-import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
-import { retrievedBookList, addBook } from '../../store/books.actions';
+import { debounceTime, map } from 'rxjs/operators';
+
+import { Store } from '@ngrx/store';
+import { AppState } from '../../store/reducer.all';
+import { BookStore } from '../../store/bookStore.model'
+import  { GetBooks, AddBook } from '../../store/bookStore.actions'
 
 @Component({
   selector: 'app-books',
@@ -17,25 +19,19 @@ import { retrievedBookList, addBook } from '../../store/books.actions';
 export class BooksComponent implements OnInit {
 
   searchFormControl = new FormControl('');
-  data!: Observable<any[]>;
   allBooks!: any[];
-
+  storeData!: Observable<BookStore>;
   mySubject = new Subject<string>();
 
-  constructor(private bookServ: BooksService, private dialog: MatDialog, private store: Store<{ books: any[] }>) {
-    this.data = this.store.select('books');
+  constructor(private dialog: MatDialog, private store: Store<AppState>) {
+    this.storeData = this.store.select('books');
    }
 
   ngOnInit(): void {
     // Getting data from api and adding it to state.
-    if(!this.bookServ.booksLoaded) {
-      this.bookServ.getBooks().subscribe(books => {
-        this.store.dispatch(retrievedBookList({ books: books.items }));
-        this.bookServ.booksLoaded = true;
-      });
-    }
+    this.store.dispatch(new GetBooks());
     // getting data from state
-    this.data.subscribe(val => this.allBooks = val);
+    this.storeData.subscribe(val => this.allBooks = val.books);
     // handling search
     this.searchFormControl.valueChanges.subscribe(val => this.handleSearch(val));
     // Debouncing
@@ -54,7 +50,7 @@ export class BooksComponent implements OnInit {
           id: `${Math.floor(Math.random() * 1000000000)}`,
           volumeInfo: Object.assign({}, val.data)
         }
-        this.store.dispatch(addBook({ book }));
+        this.store.dispatch(new AddBook(book));
       }
     });
   }
@@ -64,8 +60,8 @@ export class BooksComponent implements OnInit {
   }
 
   search(text: any): void {
-    
-    this.data.subscribe(books => {
+
+    this.storeData.pipe(map(data => data.books)).subscribe(books => {
       if(!text) {
         this.allBooks = books;
         return;
@@ -73,7 +69,7 @@ export class BooksComponent implements OnInit {
       this.allBooks = books.filter(book => 
         String(book.volumeInfo.title).trim().toLowerCase().startsWith(String(text).toLowerCase())
       )
-    });
+    })
   }
 
 }
