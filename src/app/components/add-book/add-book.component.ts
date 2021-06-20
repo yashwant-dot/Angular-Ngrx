@@ -12,7 +12,10 @@ export class AddBookComponent implements OnInit {
 
   bookAddForm!:FormGroup;
   maxDate = new Date();
-
+  test:any = {
+    next: (val: any) => console.log(val),
+    error: (error: any) => console.log(error)
+  };
   constructor(private dialogRef: MatDialogRef<AddBookComponent>, private fb: FormBuilder, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
@@ -21,26 +24,35 @@ export class AddBookComponent implements OnInit {
       author: ['', [Validators.required]],
       publishedDate: ['',[Validators.required]]
     });
+
+    
   }
 
   get title() {
-    return this.bookAddForm.get('title')?.value;
+    return this.bookAddForm.get('title');
   }
 
   get author() {
-    return this.bookAddForm.get('author')?.value;
+    return this.bookAddForm.get('author');
   }
 
   get publishedDate() {
-    return this.bookAddForm.get('publishedDate')?.value;
+    return this.bookAddForm.get('publishedDate');
   }
+
+  // getPublishedDateErrors(): string {
+  //   if(this.bookAddForm.get('publishedDate')?.hasError('matDatepickerMax')) {
+  //     return 'Please add date before today!';
+  //   }
+  //   return 'Please add date';
+  // }
 
   add(): void {
     this.dialogRef.close({ 
       data: {
-        "title": this.title,
-        "authors": [this.author],
-        "publishedDate": this.datePipe.transform(this.publishedDate, 'yyyy-MM-dd')
+        "title": this.title?.value,
+        "authors": [this.author?.value],
+        "publishedDate": this.datePipe.transform(this.publishedDate?.value, 'yyyy-MM-dd')
       }
     });
   }

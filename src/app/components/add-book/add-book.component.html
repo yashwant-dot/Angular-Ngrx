@@ -24,7 +24,7 @@
         <input matInput [matDatepicker]="picker" formControlName="publishedDate" [max]="maxDate" placeholder="MM/DD/YYYY">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
-        <mat-error>Please add date</mat-error>
+        <!-- <mat-error *ngIf="publishedDate?.invalid">{{ getPublishedDateErrors() }}</mat-error> -->
       </mat-form-field>
     </div>
 

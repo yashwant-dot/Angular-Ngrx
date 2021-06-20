@@ -20,6 +20,7 @@ import { BooksComponent } from './components/books/books.component';
 import { BookComponent } from './components/book/book.component';
 import { DetailComponent } from './components/detail/detail.component';
 import { AddBookComponent } from './components/add-book/add-book.component';
+import {MatChipsModule} from '@angular/material/chips';
 
 import { StoreModule } from '@ngrx/store';
 import { BooksEffect } from './store/bookStore.effects';
@@ -50,6 +51,7 @@ import { appReducer } from './store/reducer.all';
     MatNativeDateModule,
     MatProgressSpinnerModule,
     MatToolbarModule,
+    MatChipsModule,
     StoreModule.forRoot(appReducer),
     EffectsModule.forRoot([BooksEffect])
   ],

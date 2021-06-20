@@ -1,6 +1,14 @@
 <div class="bookDetail">
   <div class="container">
-    <button routerLink="/" class="back">Back</button>
+
+    <div class="detailNav">
+      <button routerLink="/" class="back">Back</button>
+      <div *ngIf="allBooks | async as books">
+        <mat-chip-list aria-label="Fish selection">
+          <mat-chip *ngFor="let book of books">{{ book.volumeInfo.title }}</mat-chip>
+        </mat-chip-list>
+      </div>
+    </div>
     
     <div class="mainInfo">
       <img *ngIf="book.volumeInfo.imageLinks" src="{{book.volumeInfo.imageLinks.thumbnail}}" alt="thumbnail">
@@ -11,6 +19,7 @@
         <p *ngIf="book.volumeInfo.publishedDate">Published Date: <span>{{book.volumeInfo.publishedDate}}</span></p>
         <p *ngIf="book.volumeInfo.publisher">Publisher: <span>{{book.volumeInfo.publisher}}</span></p>
       </div>
+
     </div>
 
   </div>
