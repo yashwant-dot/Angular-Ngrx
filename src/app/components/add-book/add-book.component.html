@@ -6,7 +6,8 @@
       <mat-form-field appearance="legacy" class="field">
         <mat-label>Title</mat-label>
         <input matInput formControlName="title">
-        <mat-error>Please add title</mat-error>
+        <mat-error *ngIf="title?.hasError('required')">Please add title</mat-error>
+        <mat-error *ngIf="title?.hasError('minlength')">Minimum characters should be 6</mat-error>
       </mat-form-field>
     </div>
 
@@ -14,7 +15,8 @@
       <mat-form-field appearance="legacy" class="field">
         <mat-label>Author</mat-label>
         <input matInput formControlName="author">
-        <mat-error>Please add author</mat-error>
+        <mat-error *ngIf="author?.hasError('required')">Please add author</mat-error> 
+        <mat-error *ngIf="author?.hasError('minlength')">Minimum characters should be 6</mat-error>
       </mat-form-field>
     </div>
 
@@ -24,7 +26,8 @@
         <input matInput [matDatepicker]="picker" formControlName="publishedDate" [max]="maxDate" placeholder="MM/DD/YYYY">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
-        <!-- <mat-error *ngIf="publishedDate?.invalid">{{ getPublishedDateErrors() }}</mat-error> -->
+        <mat-error *ngIf="publishedDate?.hasError('required')">Please add date</mat-error>
+        <mat-error *ngIf="publishedDate?.hasError('matDatepickerMax')">Choose date before today</mat-error>
       </mat-form-field>
     </div>
 
