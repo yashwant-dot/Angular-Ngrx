@@ -1,14 +1,7 @@
 <div class="bookDetail">
   <div class="container">
 
-    <div class="detailNav">
-      <button routerLink="/" class="back">Back</button>
-      <div *ngIf="allBooks | async as books">
-        <mat-chip-list aria-label="Fish selection">
-          <mat-chip *ngFor="let book of books">{{ book.volumeInfo.title }}</mat-chip>
-        </mat-chip-list>
-      </div>
-    </div>
+    <button routerLink="/" class="back">Back</button>
     
     <div class="mainInfo">
       <img *ngIf="book.volumeInfo.imageLinks" src="{{book.volumeInfo.imageLinks.thumbnail}}" alt="thumbnail">

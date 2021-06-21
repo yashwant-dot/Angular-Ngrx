@@ -23,6 +23,7 @@ import { AddBookComponent } from './components/add-book/add-book.component';
 import {MatChipsModule} from '@angular/material/chips';
 
 import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { BooksEffect } from './store/bookStore.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { appReducer } from './store/reducer.all';
@@ -53,7 +54,8 @@ import { appReducer } from './store/reducer.all';
     MatToolbarModule,
     MatChipsModule,
     StoreModule.forRoot(appReducer),
-    EffectsModule.forRoot([BooksEffect])
+    EffectsModule.forRoot([BooksEffect]), 
+    StoreDevtoolsModule.instrument()
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],

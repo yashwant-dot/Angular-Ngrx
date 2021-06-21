@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/reducer.all';
-import { allBooksSelector } from '../store/bookStore.selectors';
+import { getAllBooks } from '../store/bookStore.selectors';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class BooksService {
   detailBook: Subject<any> = new Subject();
   
   constructor(private http: HttpClient, private store: Store<AppState>) {
-    this.allBooks = this.store.select(allBooksSelector);
+    this.allBooks = this.store.select(getAllBooks);
    }
 
   getBooks(): Observable<any> {

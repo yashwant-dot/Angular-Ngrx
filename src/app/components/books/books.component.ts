@@ -11,7 +11,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../store/reducer.all';
 import { BookStore } from '../../store/bookStore.model'
 import  { GetBooks, AddBook } from '../../store/bookStore.actions'
-import { booksSelector } from '../../store/bookStore.selectors';
+import { getBookStore } from '../../store/bookStore.selectors';
 
 @Component({
   selector: 'app-books',
@@ -26,7 +26,7 @@ export class BooksComponent implements OnInit {
   mySubject = new Subject<string>();
 
   constructor(private dialog: MatDialog, private store: Store<AppState>, private bookServ: BooksService) {
-    this.storeData = this.store.select(booksSelector);
+    this.storeData = this.store.select(getBookStore);
    }
 
   ngOnInit(): void {
